@@ -72,25 +72,28 @@
             class="scroll-to-link"
             data-target="content-client-authentication"
           >
-            <a>Client Authentication</a>
+            <a>Keycloak Client Authentication</a>
           </li>
           <li class="scroll-to-link" data-target="content-client-revocation">
-            <a>Client Revocation</a>
+            <a>Keycloak Client Revocation</a>
           </li>
           <li class="scroll-to-link" data-target="content-create-user">
-            <a>Create User</a>
+            <a>Create Keycloak User</a>
+          </li>
+          <li class="scroll-to-link" data-target="content-authenticate-user">
+            <a>Authenticate Keycloak User</a>
           </li>
           <li class="scroll-to-link" data-target="content-get-user">
-            <a>Get User</a>
+            <a>Get Keycloak User</a>
           </li>
           <li class="scroll-to-link" data-target="content-find-user">
-            <a>Find User</a>
+            <a>Find Keycloak User</a>
           </li>
           <li class="scroll-to-link" data-target="content-delete-user">
-            <a>Delete User</a>
+            <a>Delete Keycloak User</a>
           </li>
           <li class="scroll-to-link" data-target="content-send-emails">
-            <a>Send Emails</a>
+            <a>Send Emails to Keycloak User</a>
           </li>
         </ul>
       </div>
@@ -133,7 +136,7 @@
           class="overflow-hidden content-section"
           id="content-client-authentication"
         >
-          <h2>Client Authentication</h2>
+          <h2>Keycloak Client Authentication</h2>
           <pre><code class="bash">
 curl -X POST http://localhost:8080/realms/${realm}/protocol/openid-connect/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
@@ -173,7 +176,7 @@ Response: {
               <tr>
                 <td>Content-Type</td>
                 <td>String</td>
-                <td>Application/json.</td>
+                <td>Required. application/x-www-form-urlencoded.</td>
               </tr>
             </tbody>
           </table>
@@ -218,7 +221,7 @@ Response: {
           class="overflow-hidden content-section"
           id="content-client-revocation"
         >
-          <h2>Client Auth Revocation</h2>
+          <h2>Keycloak Client Auth Revocation</h2>
           <pre><code class="bash">
 curl -X POST http://localhost:8080/realms/${realm}/protocol/openid-connect/revoke \
   -H "Content-Type: application/x-www-form-urlencoded" \
@@ -290,7 +293,7 @@ Response: No Content
           </table>
         </div>
         <div class="overflow-hidden content-section" id="content-create-user">
-          <h2>Create User</h2>
+          <h2>Create Keycloak User</h2>
           <pre><code class="bash">
 curl -X POST \
   http://localhost:8080/admin/realms/${realm}/users \
@@ -354,7 +357,7 @@ Response: No Content
           class="overflow-hidden content-section"
           id="content-authenticate-user"
         >
-          <h2>Authenticate User</h2>
+          <h2>Authenticate Keycloak User</h2>
           <pre><code class="bash">
 curl -X POST \
   http://localhost:8080/realms/${realm}/protocol/openid-connect/token \
@@ -399,7 +402,7 @@ Response: {
               <tr>
                 <td>Content-Type</td>
                 <td>String</td>
-                <td>Application/json.</td>
+                <td>Required. application/x-www-form-urlencoded.</td>
               </tr>
             </tbody>
           </table>
@@ -417,8 +420,9 @@ Response: {
                 <td>grant_type</td>
                 <td>String</td>
                 <td>
-                  Required. The type of grant being requested. For this API, it
-                  must be client_credentials.
+                  Required. Must be
+                  <code style="color: #00a8e3; font-weight: 700">password</code>
+                  for this flow.
                 </td>
               </tr>
               <tr>
@@ -437,11 +441,25 @@ Response: {
                   authentication.
                 </td>
               </tr>
+              <tr>
+                <td>username</td>
+                <td>String</td>
+                <td>
+                  Required. The username of the user trying to authenticate.
+                </td>
+              </tr>
+              <tr>
+                <td>password</td>
+                <td>String</td>
+                <td>
+                  Required. The password of the user trying to authenticate.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
         <div class="overflow-hidden content-section" id="content-get-user">
-          <h2>Get User</h2>
+          <h2>Get Keycloak User</h2>
           <pre><code class="bash">
 curl -X GET \
   http://localhost:8080/admin/realms/${realm}/users/${user_id} \
@@ -532,7 +550,7 @@ Response: {
           </table>
         </div>
         <div class="overflow-hidden content-section" id="content-find-user">
-          <h2>Find User</h2>
+          <h2>Find Keycloak User</h2>
           <pre><code class="bash">
 curl -X GET \
   http://localhost:8080/admin/realms/${realm}/users?username=${username} \
@@ -625,7 +643,7 @@ Response: [
           </table>
         </div>
         <div class="overflow-hidden content-section" id="content-delete-user">
-          <h2>Delete User</h2>
+          <h2>Delete Keycloak User</h2>
           <pre><code class="bash">
 curl -X DELETE \
   http://localhost:8080/admin/realms/${realm}/users/${user_id} \
@@ -696,7 +714,7 @@ Response: No Content
           </table>
         </div>
         <div class="overflow-hidden content-section" id="content-send-emails">
-          <h2>Send Emails</h2>
+          <h2>Send Emails to Keycloak User</h2>
           <pre><code class="bash">
 curl -X PUT \
   http://localhost:8080/admin/realms/${realm}/users/${user_id}/execute-actions-email \
@@ -794,7 +812,7 @@ Response: No Content
       <div class="content-code"></div>
     </div>
     <a
-      href="https://github.com/kc-api"
+      href="https://github.com/iamannani"
       target="_blank"
       class="github-corner"
       aria-label="View source on Github"

@@ -152,6 +152,7 @@ i {
 }
 .scroll-to-link {
   cursor: pointer;
+  font-size: 14px;
 }
 p,
 .content ul,
